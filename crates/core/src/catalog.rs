@@ -1,4 +1,4 @@
-//! The Craft App Suite: the twelve apps the launcher knows about.
+//! The Craft App Suite: the thirteen apps the launcher knows about.
 //!
 //! The list is data so a later version can fetch it from an API; [`SUITE`] is the built-in copy.
 
@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 pub enum AppGroup {
     /// The seven original apps, each with a page on getartcraft.com.
     Classic,
-    /// The five apps added after them.
+    /// The six apps added after them.
     New,
 }
 
@@ -88,8 +88,8 @@ const fn app(
     CraftApp { id, name, tagline, like, group, color, repo, former_ids: &[] }
 }
 
-/// The Craft App Suite, in display order: the seven classic apps, then the five new ones.
-pub const SUITE: [CraftApp; 12] = [
+/// The Craft App Suite, in display order: the seven classic apps, then the six new ones.
+pub const SUITE: [CraftApp; 13] = [
     app("photocraft", "PhotoCraft", "Image editing", "Adobe Photoshop", AppGroup::Classic, [0x2f, 0x7b, 0xf5], "storytold/photocraft"),
     app("vectorcraft", "VectorCraft", "Vector illustration", "Adobe Illustrator", AppGroup::Classic, [0xe8, 0x57, 0x3f], "storytold/vectorcraft"),
     app(
@@ -145,11 +145,20 @@ pub const SUITE: [CraftApp; 12] = [
         [0x1f, 0xa5, 0xc9],
         "storytold/soundcraft",
     ),
+    app(
+        "officecraft",
+        "OfficeCraft",
+        "Documents, spreadsheets, slides and PDFs in one window",
+        "Microsoft Office",
+        AppGroup::New,
+        [0x2d, 0x4f, 0x6e],
+        "storytold/officecraft",
+    ),
 ];
 
 /// Shown wherever the products the apps are inspired by are named.
 pub const TRADEMARK_NOTICE: &str = "Adobe, Photoshop, Illustrator, Premiere Pro, Lightroom, Acrobat, After Effects and InDesign are either \
-registered trademarks or trademarks of Adobe in the United States and/or other countries. Microsoft, Word, PowerPoint and Excel are \
+registered trademarks or trademarks of Adobe in the United States and/or other countries. Microsoft, Office, Word, PowerPoint and Excel are \
 trademarks of the Microsoft group of companies. Autodesk and AutoCAD are registered trademarks or trademarks of Autodesk, Inc. Avid \
 and Pro Tools are trademarks or registered trademarks of Avid Technology, Inc. All other trademarks are the property of their \
 respective owners. These names are used only to describe what each Craft App is for; the Craft App Suite is independent and is not \
@@ -180,9 +189,9 @@ mod tests {
     use super::*;
 
     #[test]
-    fn suite_has_seven_classic_and_five_new_apps_with_unique_ids() {
+    fn suite_has_seven_classic_and_six_new_apps_with_unique_ids() {
         assert_eq!(SUITE.iter().filter(|a| a.group == AppGroup::Classic).count(), 7);
-        assert_eq!(SUITE.iter().filter(|a| a.group == AppGroup::New).count(), 5);
+        assert_eq!(SUITE.iter().filter(|a| a.group == AppGroup::New).count(), 6);
         let mut ids: Vec<_> = SUITE.iter().map(|a| a.id).collect();
         ids.sort_unstable();
         ids.dedup();
