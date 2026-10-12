@@ -148,7 +148,7 @@ pub const SUITE: [CraftApp; 13] = [
     app(
         "officecraft",
         "OfficeCraft",
-        "Documents, spreadsheets, slides and PDFs in one window",
+        "Docs, sheets, slides and PDFs",
         "Microsoft Office",
         AppGroup::New,
         [0x2d, 0x4f, 0x6e],
